@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gearbox FAQ</title>
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --panel: #12161d;
+      --panel-2: #171c24;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f4f7fb;
+      --muted: #a9b4c7;
+      --soft: #8894a9;
+      --accent: #8b5cf6;
+      --max: 860px;
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(139, 92, 246, 0.10), transparent 32%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    main {
+      width: min(var(--max), calc(100% - 28px));
+      margin: 0 auto;
+      padding: 48px 0 72px;
+    }
+
+    .hero {
+      margin-bottom: 28px;
+      padding: 4px 2px 0;
+    }
+
+    .eyebrow {
+      color: var(--soft);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      font-weight: 700;
+    }
+
+    .intro {
+      margin-top: 16px;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .intro p { margin: 0; }
+
+    .faq-sections {
+      display: grid;
+      gap: 28px;
+    }
+
+    .faq-section {
+      display: grid;
+      gap: 12px;
+    }
+
+    .faq-section-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 0 2px;
+    }
+
+    .faq-section-head::after {
+      content: "";
+      flex: 1 1 auto;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .faq-section-title {
+      margin: 0;
+      color: var(--soft);
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .faq-section-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)), var(--panel);
+      overflow: hidden;
+      transition: border-color 0.16s ease, background 0.16s ease;
+    }
+
+    .faq-item[open] {
+      border-color: rgba(139, 92, 246, 0.28);
+      background: var(--panel-2);
+    }
+
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 20px;
+      user-select: none;
+    }
+
+    .faq-item summary::-webkit-details-marker { display: none; }
+
+    .faq-question {
+      font-size: 1.02rem;
+      line-height: 1.45;
+      font-weight: 620;
+      color: var(--text);
+    }
+
+    .faq-icon {
+      position: relative;
+      flex: 0 0 auto;
+      width: 24px;
+      height: 24px;
+    }
+
+    .faq-icon::before,
+    .faq-icon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 12px;
+      height: 1.8px;
+      background: var(--muted);
+      border-radius: 999px;
+      transform: translate(-50%, -50%);
+      transition: 0.16s ease;
+    }
+
+    .faq-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
+
+    .faq-item[open] .faq-icon::after {
+      opacity: 0;
+      transform: translate(-50%, -50%) rotate(90deg) scaleX(0);
+    }
+
+    .faq-answer {
+      padding: 0 20px 20px;
+      color: var(--muted);
+      font-size: 0.97rem;
+      line-height: 1.72;
+    }
+
+    .faq-answer p { margin: 0 0 12px; }
+    .faq-answer p:last-child { margin-bottom: 0; }
+    .faq-answer ul { margin: 0; padding-left: 20px; }
+    .faq-answer li { margin: 8px 0; }
+    .faq-answer a {
+      color: #c9b3ff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201, 179, 255, 0.35);
+    }
+    .faq-answer a:hover {
+      color: #dfd2ff;
+      border-bottom-color: rgba(223, 210, 255, 0.6);
+    }
+
+    strong { color: var(--text); }
+    code {
+      font-family: "JetBrains Mono", ui-monospace, monospace;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 8px;
+      padding: 0.1rem 0.38rem;
+      font-size: 0.92em;
+    }
+
+    @media (max-width: 720px) {
+      main { width: min(var(--max), calc(100% - 20px)); padding-top: 34px; }
+      .faq-sections { gap: 22px; }
+      .faq-item summary { padding: 16px 16px; }
+      .faq-answer { padding: 0 16px 16px; }
+      .faq-section-head { gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="eyebrow">Gearbox Protocol</div>
+      <h1>Gearbox FAQ</h1>
+      <div class="intro"><p>This page covers the core questions most readers ask first: what Gearbox is, who it is for, how to use it, how risk works, how earning and borrowing work, how liquidations work, how governance works, and how market curation works.</p></div>
+    </section>
+
+    <section class="faq-sections" aria-label="FAQ sections">
+      <section class="faq-section">
+      <div class="faq-section-head">
+        <h2 class="faq-section-title">General</h2>
+      </div>
+      <div class="faq-section-list">
+        <details class="faq-item">
+  <summary>
+    <span class="faq-question">What is Gearbox?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Gearbox is a permissionless credit layer for onchain lending and leverage. Users can supply liquidity or borrow through Credit Accounts, while curators, developers, and partners can launch markets and build on top of the infrastructure.</p>
+<p>For open-source repositories and protocol code, see <a href="https://github.com/Gearbox-protocol" target="_blank" rel="noreferrer noopener">Gearbox Protocol on GitHub</a>.</p></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">Who is Gearbox for?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Gearbox is designed for three main groups:</p>
+<ul><li>lenders who want to earn yield by supplying liquidity</li><li>borrowers who want leveraged exposure through Credit Accounts</li><li>curators, developers, and partners who want to launch markets or build products on top of the infrastructure</li></ul></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">How do I use Gearbox?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>If you are using Gearbox as a lender or borrower, the simplest entry point is the <a href="https://app.gearbox.finance" target="_blank" rel="noreferrer noopener">Gearbox app</a>. That site is a frontend, not the protocol itself. Because Gearbox Protocol is permissionless, positions can also be managed through other interfaces or directly onchain.</p>
+<p>If you want to launch or operate markets, the curator entry point is <a href="https://permissionless.gearbox.foundation" target="_blank" rel="noreferrer noopener">permissionless.gearbox.foundation</a>.</p>
+<p>For guides, reference material, and deeper protocol documentation, see <a href="https://docs.gearbox.fi" target="_blank" rel="noreferrer noopener">docs.gearbox.fi</a>.</p></div>
+</details>
+      </div>
+    </section><section class="faq-section">
+      <div class="faq-section-head">
+        <h2 class="faq-section-title">Security &amp; Risks</h2>
+      </div>
+      <div class="faq-section-list">
+        <details class="faq-item">
+  <summary>
+    <span class="faq-question">How is Gearbox secured?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Gearbox uses several security layers, including 20+ published audits across major protocol versions, an active <a href="https://immunefi.com/bug-bounty/gearbox/" target="_blank" rel="noreferrer noopener">Immunefi bug bounty</a>, onchain bytecode verification for permissionless deployments, monitoring and liquidation infrastructure, and internal testing before upgrades are shipped.</p>
+<p>These measures reduce risk, but they do not remove it. Users still face smart contract, market, and operational risk. Verified permissionless deployments can also be checked against the <a href="https://permissionless.gearbox.foundation/bytecode" target="_blank" rel="noreferrer noopener">Gearbox bytecode repository</a>.</p></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">What are the risks of using Gearbox?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Gearbox reduces risk through audits, governance controls, bug bounty incentives, bytecode verification, and market-level constraints. But users still face several core risk categories:</p>
+<ul><li><strong>Smart contract risk.</strong> Undiscovered bugs in Gearbox contracts, adapters, or integrated protocols could cause partial or total loss of funds.</li><li><strong>Oracle risk.</strong> Gearbox depends on external and composite price feeds. Incorrect pricing can lead to bad liquidations, bad debt, or incorrect protocol behavior.</li><li><strong>Collateral and liquidation risk.</strong> If collateral falls in value too quickly, or liquidators fail to act in time, positions can become undercollateralized and lenders can take losses.</li><li><strong>Asset and issuer risk.</strong> Stablecoins, wrapped assets, or tokenized securities may have issuer-side restrictions, depegs, freezes, or other external failure modes.</li><li><strong>Network, interface, and liquidity risk.</strong> Blockchain congestion, bridge or RPC failures, frontend outages, and high pool utilization can affect withdrawals and position management.</li></ul></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">Can my position be seized or frozen?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>At the protocol level, no admin role can selectively seize an individual user&#x27;s position. Gearbox includes emergency controls such as pause, but those controls are designed to restrict market operations in stress scenarios, not to confiscate user assets.</p>
+<p>However, some markets — especially those involving tokenized securities or other issuer-controlled assets — may be subject to additional issuer or market-specific controls. Always read the market&#x27;s own terms and conditions.</p></div>
+</details>
+      </div>
+    </section><section class="faq-section">
+      <div class="faq-section-head">
+        <h2 class="faq-section-title">Earn</h2>
+      </div>
+      <div class="faq-section-list">
+        <details class="faq-item">
+  <summary>
+    <span class="faq-question">How can I earn?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>You can earn by supplying supported assets through the <a href="https://app.gearbox.finance" target="_blank" rel="noreferrer noopener">Gearbox app</a> or another integrated interface. Those assets are deposited into a pool and earn yield from borrower activity in that market.</p></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">How much do I earn?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Supply APY is not fixed. It changes over time based on borrowing demand, pool utilization, and any market-specific incentive programs. Higher borrower demand usually leads to higher lender yield.</p>
+<p>Live market data and pool metrics are available on <a href="https://data.gearbox.finance" target="_blank" rel="noreferrer noopener">data.gearbox.finance</a>.</p></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">What are the risks of earning?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Alongside the general protocol risks above, earning has three main market-specific risks:</p>
+<ul><li><strong>Bad debt risk.</strong> If a borrower&#x27;s collateral falls faster than it can be liquidated, part of the loss can be absorbed by the affected pool.</li><li><strong>Liquidity risk.</strong> You may not be able to withdraw immediately if most pool liquidity is already borrowed.</li><li><strong>Market configuration risk.</strong> Your exposure depends on the curator&#x27;s risk settings, allowed collateral set, and liquidation design for that market.</li></ul></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">How do I withdraw?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>You can withdraw supplied assets whenever enough liquidity is available in the pool. If utilization is high, you may need to wait until borrowers repay or liquidity returns.</p></div>
+</details>
+      </div>
+    </section><section class="faq-section">
+      <div class="faq-section-head">
+        <h2 class="faq-section-title">Borrow</h2>
+      </div>
+      <div class="faq-section-list">
+        <details class="faq-item">
+  <summary>
+    <span class="faq-question">How do I borrow?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Gearbox is an overcollateralized lending protocol. To borrow, you deposit collateral, open a Credit Account, and borrow against that collateral through a selected market.</p>
+<p>The simplest path is through the Borrow section of the <a href="https://app.gearbox.finance" target="_blank" rel="noreferrer noopener">Gearbox app</a> or another integrated frontend.</p></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">What can I borrow?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Each Gearbox market has a defined borrowed asset and its own accepted collateral set. In practice, you choose the market that matches the asset you want to borrow and the collateral you want to use.</p>
+<p>Borrowing is possible only if that market exists and has enough available liquidity.</p></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">How much can I borrow?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Your borrowing power depends on the value of your collateral, the market&#x27;s Liquidation Thresholds, quota constraints, and your resulting Health Factor. More conservative market settings mean lower borrowing power against the same collateral base.</p></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">How much does borrowing cost?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Borrowing cost is not fixed. It is made up of the pool&#x27;s base rate, any collateral-specific quota rate, and the market&#x27;s Interest Fee. As utilization rises, borrowing usually becomes more expensive.</p></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">When do I need to repay?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Most positions do not have a fixed maturity date. As long as your Credit Account remains properly collateralized, you can keep the position open.</p>
+<p>However, interest accrues continuously, so your Health Factor can deteriorate over time even if prices do not move.</p></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">Does my collateral earn yield?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Not by default. Idle collateral inside a Credit Account mainly serves as protection for your debt.</p>
+<p>If you deploy the account into a strategy, your return depends on that strategy and the assets held inside the account.</p></div>
+</details>
+      </div>
+    </section><section class="faq-section">
+      <div class="faq-section-head">
+        <h2 class="faq-section-title">Liquidations</h2>
+      </div>
+      <div class="faq-section-list">
+        <details class="faq-item">
+  <summary>
+    <span class="faq-question">What are liquidations?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Liquidation is the mechanism that protects lenders when a borrower&#x27;s position becomes unsafe. In Gearbox, a position becomes liquidatable when its Health Factor falls below 1, or when a market-specific expiration condition is reached.</p></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">Who performs liquidations?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Liquidations are permissionless. Anyone can execute a liquidation on an eligible position.</p>
+<p>Gearbox can also use deleverage bots as a first line of defense, so smaller risk breaches may be handled through partial deleveraging before a full liquidation is needed.</p></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">What is Health Factor?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Health Factor is the main safety metric of a borrow position. In simplified form:</p>
+<p><code>Health Factor = Total Weighted Value / Total Debt</code></p>
+<p>The higher the Health Factor, the safer the position. When Health Factor falls below 1, the position becomes eligible for liquidation.</p></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">What is liquidation price?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Liquidation price is the price level at which your collateral would no longer support your debt and your Health Factor would fall to 1. It is not static.</p>
+<p>It moves over time as asset prices change, interest accrues, debt grows, or you modify the position.</p></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">How can I avoid liquidations?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>The main way to avoid liquidation is to keep a healthy buffer above the minimum threshold. In practice, that means monitoring your Health Factor, adding collateral, repaying debt, reducing leverage, or closing riskier parts of the position before volatility forces the account into liquidation.</p></div>
+</details>
+      </div>
+    </section><section class="faq-section">
+      <div class="faq-section-head">
+        <h2 class="faq-section-title">Governance</h2>
+      </div>
+      <div class="faq-section-list">
+        <details class="faq-item">
+  <summary>
+    <span class="faq-question">What does the DAO control?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>The Gearbox DAO governs the protocol at the infrastructure layer. Its role includes authorizing new core contract versions, managing the verified bytecode repository, activating new chains, setting protocol-level fee split parameters, and approving incentive programs.</p>
+<p>The DAO does not manage day-to-day risk settings of live curator-run markets and cannot seize user funds.</p></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">What can GEAR token holders do?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>GEAR token holders can participate in governance through Snapshot voting and related DAO processes. They influence protocol upgrades, chain activation, fee split decisions, incentive allocations, and other tokenholder programs defined by governance.</p>
+<p>Active governance votes and governance history are available on <a href="https://snapshot.box/#/s:gearbox.eth" target="_blank" rel="noreferrer noopener">Snapshot</a>.</p></div>
+</details>
+      </div>
+    </section><section class="faq-section">
+      <div class="faq-section-head">
+        <h2 class="faq-section-title">Curation</h2>
+      </div>
+      <div class="faq-section-list">
+        <details class="faq-item">
+  <summary>
+    <span class="faq-question">What is the curator&#x27;s role?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>A market curator operates a specific Gearbox market. The curator defines the market&#x27;s boundary conditions: allowed collateral, Liquidation Thresholds, debt limits, rate models, fee levels, and allowed integrations.</p>
+<p>The curator is a risk parameter manager, not an asset custodian. A curator can shape a market, but cannot withdraw LP funds or seize borrower collateral.</p></div>
+</details><details class="faq-item">
+  <summary>
+    <span class="faq-question">Can anyone become a curator?</span>
+    <span class="faq-icon" aria-hidden="true"></span>
+  </summary>
+  <div class="faq-answer"><p>Yes. Market creation on Gearbox is permissionless within an activated chain. Any operator can launch and manage a market, provided the required infrastructure exists on that chain and the needed price feeds are available through the protocol&#x27;s technical layer.</p></div>
+</details>
+      </div>
+    </section>
+    </section>
+  </main>
+</body>
+</html>
