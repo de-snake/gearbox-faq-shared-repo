@@ -11,6 +11,7 @@ This repo is now a reusable React FAQ starter built around a markdown source fil
 - added search, deep links, and expand/collapse controls
 - added parser + filtering tests
 - kept the repo static-host friendly for Vercel
+- simplified the Health Factor FAQ answer to remove formula-heavy jargon
 
 ### Main commands
 

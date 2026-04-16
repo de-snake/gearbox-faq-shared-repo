@@ -132,11 +132,9 @@ Gearbox can also use deleverage bots as a first line of defense, so smaller risk
 
 ### What is Health Factor?
 
-Health Factor is the main safety metric of a borrow position. In simplified form:
+Health Factor is the main safety metric of a borrow position. It measures how much cushion your Credit Account has between the value of its assets and the debt it owes, after the protocol applies its own risk limits.
 
-`Health Factor = Total Weighted Value / Total Debt`
-
-The higher the Health Factor, the safer the position. When Health Factor falls below 1, the position becomes eligible for liquidation.
+A higher Health Factor means more room for price moves and accrued interest. When Health Factor falls below 1, the position becomes eligible for liquidation.
 
 ### What is liquidation price?
 
