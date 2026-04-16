@@ -1,106 +1,101 @@
-# Gearbox FAQ — reusable React repo
+# Gearbox FAQ — reusable React starter
 
 Live URL: https://gearbox-faq-shared-repo.vercel.app
+Repo: https://github.com/de-snake/gearbox-faq-shared-repo
+Runtime: Node.js 20+
 
-This repo is now a self-contained React FAQ starter, not just a dumped static HTML artifact.
+This repo is a small React + Vite starter for FAQ pages with:
+- markdown as the content source of truth
+- reusable FAQ UI components
+- search and per-question deep links
+- static Vercel deployment
 
-Why it was not React before:
-- the first handoff optimized for the fastest possible shareable artifact
-- static HTML let the page go live immediately with zero app scaffolding
-- that was fine for handoff speed, but weak for reuse
-
-This version fixes that.
-
-## What collaborators can do
-
-### 1. Content editors
-If someone only wants to update FAQ copy:
+## Quick start
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then edit:
+Then open the local Vite URL and edit:
+- `docs/faq.md` for content
+- `src/site/gearbox-brand.ts` for links and branding
 
+## Common commands
+
+```bash
+npm run dev
+npm run test
+npm run build
+npm run preview
+vercel --prod
+```
+
+## Who should touch what
+
+### Content editors
+If you only want to update copy, edit:
 - `docs/faq.md`
 
-The page updates through the React app.
+You do not need to touch React components for normal FAQ updates.
 
-### 2. Developers
-If someone wants to rebrand or reuse the FAQ shell:
+### Developers
+If you want to reuse the FAQ shell for another project:
+- replace `docs/faq.md`
+- update `src/site/gearbox-brand.ts`
+- keep `src/components/` and `src/lib/` unless the UI model needs to change
 
-- edit brand config in `src/site/gearbox-brand.ts`
-- reuse the parser and components from:
-  - `src/lib/`
-  - `src/components/`
-
-The app is intentionally split into:
-- markdown source parsing
-- reusable FAQ page components
-- site-specific Gearbox branding
-
-### 3. Deployment owners
+### Deployment owners
 To ship changes:
 
 ```bash
+npm run test
 npm run build
 vercel --prod
 ```
 
-## Repo structure
+## Project structure
 
-- `docs/faq.md` — source of truth for content
-- `src/lib/faq-parser.ts` — parses the markdown FAQ structure
+- `docs/faq.md` — content source of truth
+- `src/App.tsx` — current page assembly
+- `src/site/gearbox-brand.ts` — site-specific branding and outbound links
+- `src/components/` — reusable FAQ UI pieces
+- `src/lib/faq-parser.ts` — markdown parser
 - `src/lib/filter-faq-document.ts` — search filtering
-- `src/components/` — reusable FAQ UI components
-- `src/site/gearbox-brand.ts` — site-specific links and branding
-- `src/App.tsx` — example assembly for the Gearbox page
-- `src/lib/faq-parser.test.ts` — parser + filtering tests
+- `src/lib/faq-parser.test.ts` — parser and filtering tests
+- `src/styles.css` — page styling
 - `vercel.json` — deploy config
 
-## Markdown format expected
+## Markdown shape expected
 
 The parser expects:
-
 - one `#` page title
 - optional intro paragraphs before the first section
 - `##` section headings
 - `###` question headings
 - paragraphs and `-` bullet lists inside answers
 
-That keeps content editing simple for non-developers.
+That keeps editing simple for non-developers.
 
-## Commands
+## What this starter gives you
 
-```bash
-npm install
-npm run dev
-npm run test
-npm run build
-npm run preview
-```
+- markdown-driven FAQ content
+- searchable questions and answers
+- direct links to individual questions
+- section navigation chips
+- reusable parser + component split
+- static-host friendly build output
 
 ## Reuse pattern
 
-If a teammate wants the same FAQ shell for another project:
-
-1. copy this repo or fork it
+If a teammate wants the same setup for another project:
+1. fork or copy this repo
 2. replace `docs/faq.md`
 3. update `src/site/gearbox-brand.ts`
-4. keep the component and parser layers unchanged unless the UI model needs to change
+4. keep the parser and component layers unless requirements actually change
 
-## What makes this better than the first version
+## Notes
 
-- React-based instead of one-off generated HTML
-- markdown remains the source of truth
-- searchable and linkable FAQ items
-- reusable component structure for future FAQ pages
-- typed parsing logic
-- tests for the parser/filtering layer
-- still deploys as a static Vercel site
-
-## Current live deployment
-
-- site: https://gearbox-faq-shared-repo.vercel.app
-- repo: https://github.com/de-snake/gearbox-faq-shared-repo
+- This is a repo starter, not an npm package.
+- `dist/` is build output only.
+- `.vercel/` stays ignored so the repo remains push-friendly.
