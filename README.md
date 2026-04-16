@@ -17,9 +17,15 @@ npm install
 npm run dev
 ```
 
-Then open the local Vite URL and edit:
-- `docs/faq.md` for content
-- `src/site/gearbox-brand.ts` for links and branding
+Then open the local Vite URL.
+
+For normal FAQ updates:
+- edit `docs/faq.md`
+
+Only touch `src/site/gearbox-brand.ts` if you want to:
+- change branding
+- change outbound links
+- reuse this starter for another project
 
 ## Common commands
 
@@ -31,22 +37,40 @@ npm run preview
 vercel --prod
 ```
 
+## Deploy prerequisites
+
+Before using `vercel --prod`, make sure the collaborator has:
+- Vercel CLI installed
+- access to the target Vercel project
+- an authenticated CLI session (`vercel whoami` should work)
+- the repo linked to the correct Vercel project
+
+Typical first-time setup:
+
+```bash
+npm install
+vercel whoami
+vercel link
+npm run build
+vercel --prod
+```
+
 ## Who should touch what
 
 ### Content editors
-If you only want to update copy, edit:
+Edit only:
 - `docs/faq.md`
 
-You do not need to touch React components for normal FAQ updates.
+You do not need to touch React components for normal FAQ copy updates.
 
 ### Developers
-If you want to reuse the FAQ shell for another project:
+For reuse or rebranding:
 - replace `docs/faq.md`
 - update `src/site/gearbox-brand.ts`
-- keep `src/components/` and `src/lib/` unless the UI model needs to change
+- keep `src/components/` and `src/lib/` unless the UI model actually needs to change
 
 ### Deployment owners
-To ship changes:
+Ship changes with:
 
 ```bash
 npm run test
@@ -66,27 +90,22 @@ vercel --prod
 - `src/styles.css` — page styling
 - `vercel.json` — deploy config
 
-## Markdown shape expected
+## Supported markdown shape
 
-The parser expects:
+The parser supports this narrow FAQ-oriented subset:
 - one `#` page title
 - optional intro paragraphs before the first section
 - `##` section headings
 - `###` question headings
-- paragraphs and `-` bullet lists inside answers
+- paragraphs
+- `-` bullet lists
+- inline links
+- bold text
+- inline code
 
-That keeps editing simple for non-developers.
+It is not full Markdown. Do not assume support for tables, images, nested lists, blockquotes, or other advanced syntax unless the parser is extended.
 
-## What this starter gives you
-
-- markdown-driven FAQ content
-- searchable questions and answers
-- direct links to individual questions
-- section navigation chips
-- reusable parser + component split
-- static-host friendly build output
-
-## Reuse pattern
+## Reuse checklist
 
 If a teammate wants the same setup for another project:
 1. fork or copy this repo

@@ -12,7 +12,8 @@ This repo is now a reusable React FAQ starter built around a markdown source fil
 - added parser + filtering tests
 - kept the repo static-host friendly for Vercel
 - simplified the Health Factor FAQ answer to remove formula-heavy jargon
-- tightened the README around quick start, ownership boundaries, and reuse instructions
+- tightened the README around quick start, deployment prerequisites, parser limits, and reuse instructions
+- reworked per-question mobile actions so expand and deep-link controls stay as icon buttons in the top-right corner
 
 ### Main commands
 
