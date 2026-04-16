@@ -1,5 +1,7 @@
 # Gearbox FAQ — shared repo folder
 
+Live URL: https://gearbox-faq-shared-repo.vercel.app
+
 This folder is the preferred share artifact when someone wants to push the page into a shared Git repository.
 
 It contains both:
@@ -15,10 +17,18 @@ It contains both:
 - `index.html` — static entrypoint for Vercel or any static host
 - `vercel.json` — minimal static config
 
+`.vercel/` metadata stays ignored so the folder remains push-friendly in Git.
+
 ## Rebuild after editing
 
 ```bash
 python3 scripts/build.py
+```
+
+## Redeploy to Vercel
+
+```bash
+vercel --prod
 ```
 
 ## Local preview
