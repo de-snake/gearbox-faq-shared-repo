@@ -11,18 +11,18 @@ export type FaqItemProps = {
 
 function LinkIcon() {
   return (
-    <svg aria-hidden="true" className="faq-icon-svg" viewBox="0 0 20 20">
-      <path d="M8.5 11.5 11.5 8.5" />
-      <path d="M6.2 13.8 4.8 15.2a3.25 3.25 0 1 1-4.6-4.6l2.9-2.9a3.25 3.25 0 0 1 4.6 0" />
-      <path d="M13.8 6.2 15.2 4.8a3.25 3.25 0 1 0-4.6-4.6l-2.9 2.9a3.25 3.25 0 0 0 0 4.6" />
+    <svg aria-hidden="true" className="faq-icon-svg" viewBox="0 0 24 24">
+      <path d="m10.5 13.5 3-3" />
+      <path d="m8.25 16.5-1.5 1.5a3.75 3.75 0 1 1-5.303-5.303l3-3a3.75 3.75 0 0 1 5.303 0" />
+      <path d="m15.75 7.5 1.5-1.5a3.75 3.75 0 1 1 5.303 5.303l-3 3a3.75 3.75 0 0 1-5.303 0" />
     </svg>
   );
 }
 
 function CheckIcon() {
   return (
-    <svg aria-hidden="true" className="faq-icon-svg" viewBox="0 0 20 20">
-      <path d="M4.5 10.5 8 14l7.5-7.5" />
+    <svg aria-hidden="true" className="faq-icon-svg" viewBox="0 0 24 24">
+      <path d="M5 12.5 9.25 16.75 19 7" />
     </svg>
   );
 }
