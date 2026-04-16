@@ -8,7 +8,7 @@ This repo is now a reusable React FAQ starter built around a markdown source fil
 - converted the static handoff into a React + Vite app
 - kept `docs/faq.md` as the content source of truth
 - split UI into reusable FAQ components
-- added search, deep links, and expand/collapse controls
+- added search, deep links, and simpler per-item FAQ interactions
 - added parser + filtering tests
 - kept the repo static-host friendly for Vercel
 - simplified the Health Factor FAQ answer to remove formula-heavy jargon

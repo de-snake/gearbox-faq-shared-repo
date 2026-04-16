@@ -5,10 +5,6 @@ import { FaqBlocks } from './FaqBlocks';
 import { FaqItem } from './FaqItem';
 import { FaqSectionNav } from './FaqSectionNav';
 
-function getQuestionIds(faqDocument: FaqDocument): string[] {
-  return faqDocument.sections.flatMap((section) => section.questions.map((question) => question.id));
-}
-
 function formatQuestionCount(count: number, label = 'question'): string {
   return `${count} ${label}${count === 1 ? '' : 's'}`;
 }
@@ -22,7 +18,6 @@ export function FaqPage({ brand, document: faqDocument }: { brand: FaqBrand; doc
     () => filterFaqDocument(faqDocument, query),
     [faqDocument, query],
   );
-  const allFilteredIds = useMemo(() => getQuestionIds(filteredDocument), [filteredDocument]);
 
   useEffect(() => {
     const title = brand.titleSuffix
@@ -90,14 +85,6 @@ export function FaqPage({ brand, document: faqDocument }: { brand: FaqBrand; doc
     });
   };
 
-  const handleExpandAll = () => {
-    setOpenIds(new Set(allFilteredIds));
-  };
-
-  const handleCollapseAll = () => {
-    setOpenIds(new Set());
-  };
-
   const handleCopyLink = async (id: string) => {
     const url = `${window.location.origin}${window.location.pathname}#${id}`;
     try {
@@ -146,15 +133,6 @@ export function FaqPage({ brand, document: faqDocument }: { brand: FaqBrand; doc
             value={query}
           />
         </label>
-
-        <div className="faq-toolbar-actions">
-          <button className="faq-secondary-button" onClick={handleExpandAll} type="button">
-            Expand visible
-          </button>
-          <button className="faq-secondary-button" onClick={handleCollapseAll} type="button">
-            Collapse all
-          </button>
-        </div>
       </section>
 
       <FaqSectionNav sections={filteredDocument.sections} />

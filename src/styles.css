@@ -178,25 +178,6 @@ button {
   outline-offset: 2px;
 }
 
-.faq-toolbar-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.faq-secondary-button {
-  min-height: 48px;
-  padding: 0 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(15, 23, 42, 0.88);
-  color: #e2e8f0;
-}
-
-.faq-secondary-button:hover {
-  border-color: rgba(129, 140, 248, 0.34);
-}
-
 .faq-section-nav {
   position: sticky;
   top: 12px;
